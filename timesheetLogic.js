@@ -40,7 +40,7 @@ $("#add-train-btn").on("click", function(event) {
   console.log(newTrain.start);
   console.log(newTrain.frequency);
 
-  alert("train successfully added");
+  alert("train successfully added"); //clear after funcitoning
 
   // Clears all of the text-boxes
   $("#train-name-input").val("");
@@ -65,28 +65,29 @@ database.ref().on("child_added", function(childSnapshot) {
   console.log(trainStart);
   console.log(trainFrequency);
 
-  // Prettify the train start
-  var trainStartPretty = moment.unix(trainStart).format("MM/DD/YYYY");
+  // Calculate next arrival and minutes away
+  var tFrequency = 3;
+  var firstTime = "03:00";
 
-  // Calculate the months worked using hardcore math
-  // To calculate the months worked
-  var trainMonths = moment().diff(moment(trainStart, "X"), "months");
-  console.log(trainMonths);
+  var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
+            console.log(firstTimeConverted);
+  
+  var currentTime = moment();
 
-  // Calculate the total billed frequency
-  var trainBilled = trainMonths * trainFrequency;
-  console.log(trainBilled);
+  var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+  var tRemainder = diffTime % tFrequency;
+  var tMinutesTillTrain = tFrequency - tRemainder;
+  var arrivalNext = moment().add(tMinutesTillTrain, "minutes");
+  var nextTrain = moment(arrivalNext).format("hh:mm");
 
   // Create the new row
   var newRow = $("<tr>").append(
     $("<td>").text(trainName),
     $("<td>").text(trainDestination),
     $("<td>").text(trainFrequency),
-    
-    $("<td>").text(trainStartPretty), //change to next arrival
-    $("<td>").text(trainMonths), //change to minutes away
+    $("<td>").text(nextTrain), 
+    $("<td>").text(tMinutesTillTrain)
 
-    // $("<td>").text(trainBilled)
   );
 
   // Append the new row to the table
