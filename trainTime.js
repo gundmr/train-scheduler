@@ -1,4 +1,4 @@
-// 1. Initialize Firebase
+//Initialize Firebase
 var config = {
     apiKey: "AIzaSyDiun4ZFnxA4Ttyw2y_YAarfCvFPEnAJ_A",
     authDomain: "project-tester-104bc.firebaseapp.com",
@@ -13,7 +13,7 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
-// 2. Button for adding trains
+//Button for adding trains
 $("#add-train-btn").on("click", function(event) {
   event.preventDefault();
 
@@ -49,7 +49,7 @@ $("#add-train-btn").on("click", function(event) {
   $("#frequency-input").val("");
 });
 
-// 3. Create Firebase event for adding train to the database and a row in the html when a user adds an entry
+// Create Firebase event for adding train to the database and a row in the html when a user adds an entry
 database.ref().on("child_added", function(childSnapshot) {
   console.log(childSnapshot.val());
 
