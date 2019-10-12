@@ -4,16 +4,14 @@
     * Destination 
     * First Train Time -- in military time
     * Frequency -- in minutes
-
 * After submission the user will then see their train displayed as the following:
     * Train Name
     * Destination
     * Frequency (mins)
     * Next Arrival
     * Minutes Away
-
-The above will calculate when the next train will arrive - relative to the current time.
-Users from many different machines must be able to view same train times, data stored in Firebase. 
+* The above will calculate when the next train will arrive - relative to the current time.
+* Data stored in Firebase so that users from different machines are able to view same train times.
 
 ## Getting Started
 View applicaiton at: https://github.com/gundmr/trainScheduler
